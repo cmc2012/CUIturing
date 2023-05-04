@@ -44,4 +44,8 @@ if(actid==1):
             os.scandir("Lib")
             print("您的程序包含turingAPI,请在settings.ini中开启full-version项")
         except:
-            pass
+            print("turingAPI缺少!")
+    try:
+        import aiohttp
+    except:
+        print("aiohttp缺少!")
