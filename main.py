@@ -24,11 +24,14 @@
            佛祖保佑     永不宕机     永无BUG
 '''
 import json,os
-have_settings=os.path.isfile(".//settings.ini")
-setting=open(".//settings.ini")
-if(not(have_settings)):
-    setting.write("")
-import turingAPI
+with open("settings.ini","r") as load_file:
+  settings=load_file.read()
+  load_file.close()
+psettings=json.loads(settings)
+if(psettings["full-version"]==True):
+    import Lib.turingAPI as turingAPI
+else:
+    import turingAPI
 import urllib3
 cookie=input("cookie:")
 print("Logging...")
