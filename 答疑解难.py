@@ -13,39 +13,48 @@
 
 print("欢迎使用CUITuring程序答疑解难")
 actid=int(input("输入1检查依赖库"))
+import json,os
 if(actid==1):
     '''
     以下判断及捕捉都是答辩
     '''
-    try:
-        import os
-    except:
-        print("os缺少!")
+    lack=[]
     try:
         import asyncio
     except:
-        print("asyncio缺少!")
+        lack.append("asyncio")
     try:
         import urllib3
     except:
-        print("urllib3缺少!")
+        lack.append("urllib3")
     try:
         import git
     except:
-        print("gitpython缺少!")
-    try:
-        import gitdb
-    except:
-        print("gitdb缺少!")
+        lack.append("gitpython")
     try:
         import turingAPI
     except:
-        try:
-            os.scandir("Lib")
-            print("您的程序包含turingAPI,请在settings.ini中开启full-version项")
-        except:
-            print("turingAPI缺少!")
+        with open("settings.ini","r") as load_file:
+            settings=load_file.read()
+            load_file.close()
+        psettings=json.loads(settings)
+        if(psettings["full-version"]==False):
+            try:
+                os.scandir("Lib")
+                print("您的程序包含turingAPI,请在settings.ini中开启full-version项")
+            finally:
+                lack.append("turingAPI")
     try:
         import aiohttp
     except:
-        print("aiohttp缺少!")
+        lack.append("aiohttp")
+    try:
+        import keyboard
+    except:
+        lack.append("keyboard")
+    if(lack==[]):
+        print("您的程序不缺少支持库!")
+    else:
+        print("您的程序缺少",end="")
+        for x in lack:
+            print(x+" ",end="")
