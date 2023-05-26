@@ -140,7 +140,7 @@ class icodeUser():
 
 
        def discoveryWorks(self,page,isParse=0):
-              return self.http.request('GET',f'https://icodeshequ.youdao.com/_next/data/oaW1PKMM8euJOF2QmW82a/discovery.json?page={page}') if not isParse else json.loads(self.http.request('GET',f'https://icodeshequ.youdao.com/_next/data/oaW1PKMM8euJOF2QmW82a/discovery.json?page={page}').data.decode('utf-8'))['pageProps']['initModel']['list']
+              return self.http.request('GET',f'https://icodeshequ.youdao.com/_next/data/dJIj5W_10eGl40JtDuWiA/discovery.json?page={page}') if not isParse else json.loads(self.http.request('GET',f'https://icodeshequ.youdao.com/_next/data/oaW1PKMM8euJOF2QmW82a/discovery.json?page={page}').data.decode('utf-8'))['pageProps']['initModel']['list']
 
 
        def getWorks(self,page,getNum,sortType,theme='all',codeLanguage='all',keyword='',isParse=0):
