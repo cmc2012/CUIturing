@@ -1,5 +1,9 @@
 # 本项目使用turingAPI
+
+删除了full-version项，本项目对turingAPI进行了修改
+
 ## 欢迎使用CUIturing!
+
 不要被"CUI"吓到的，其实很简单的！
 
 ~~如果你是帅鸽的话，完全不用看README的，只要咚~咚~咚~就会用了~~
