@@ -1,48 +1,68 @@
-'''
-                       _oo0oo_
-                      o8888888o
-                      88" . "88
-                      (| -_- |)
-                      0\  =  /0
-                    ___/`---'\___
-                  .' \\|     |// '.
-                 / \\|||  :  |||// \
-                / _||||| -:- |||||- \
-               |   | \\\  - /// |   |
-               | \_|  ''\---/''  |_/ |
-               \  .-\__  '-'  ___/-. /
-             ___'. .'  /--.--\  `. .'___
-          ."" '<  `.___\_<|>_/___.' >' "".
-         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-         \  \ `_.   \_ __\ /__ _/   .-` /  /
-     =====`-.____`.___ \_____/___.-`___.-'=====
-                       `=---='
+import Tools.Download_project
+import colorama
+import json
+import os
 
 
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def tools():
+    print(colorama.Back.LIGHTRED_EX + colorama.Fore.BLACK + "===========Tools===========")
+    print("(1)下载项目")
+    print("输入e退出")
+    actionId = input()
+    try:
+        actionId = int(actionId)
+    except:
+        if (actionId == "e"):
+            return 0
+        else:
+            print("无效的动作id")
+    if (actionId == 1):
+        projectPath = input()
+        Tools.Download_project.get_project("https://icode.youdao.com/scratch/project/" + user.getWorkId(projectPath),user.getWorkDetail(user.getWorkId(projectPath), 1)["title"])
+    tools()
+def menu(num):
+    try:
+        num = int(num)
+    except:
+        if (num == "e"):
+            return 0
+        else:
+            print("无效的动作id")
+    if (num == 0):
+        tools()
+    if (num == 1):
+        works=user.getWorks(1,100,2,isParse=1)
+        works=json.dumps(works)
+        print(works)
+def saveCookie(cookie):
+    with open("cookie.txt","w") as file:
+        file.write(cookie)
+def readcookie():
+    with open("cookie.txt","r") as file:
+        return file.read()
 
-           佛祖保佑     永不宕机     永无BUG
-'''
-import json,os
-with open("settings.ini","r") as load_file:
-  settings=load_file.read()
-  load_file.close()
-psettings=json.loads(settings)
-if(psettings["full-version"]==True):
+colorama.init(autoreset=True)
+with open("settings.json", "r") as load_file:
+    settings = load_file.read()
+    load_file.close()
+psettings = json.loads(settings)
+if (psettings["full-version"] == True):
     import Lib.turingAPI as turingAPI
 else:
     import turingAPI
-import urllib3
-cookie=input("cookie:")
-print("Logging...")
-user=turingAPI.icodeUser(cookie)
-print("Login is successfully.")
-if(not(user.checkLogin())):
-    print("cookie is invalid")
-    exit(1)
-print("小图灵控制台版登陆成功，请输入功能编号")
-'''
-while(True):
-    num=int(input())
-    if(num)
-    '''
+if(not(os.path.exists("cookie.txt"))):
+    cookie = input("请输入cookie\n")
+    saveCookie(cookie)
+print("登陆中")
+user = turingAPI.icodeUser(readcookie())
+if (not (user.isLogin)):
+    if(os.path.exists("cookie.txt")):
+        cookie = input("请输入cookie\n")
+        saveCookie(cookie)
+        print("请重启程序!")
+    print(colorama.Fore.RED + "cookie is invalid")
+    exit(-1)
+print(colorama.Fore.GREEN + "登录完成")
+while (True):
+    num=input()
+    menu(num)
