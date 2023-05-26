@@ -2,6 +2,7 @@ import Tools.Download_project
 import colorama
 import json
 import os
+import Lib.turingAPI as turingAPI
 
 
 def tools():
@@ -46,10 +47,6 @@ with open("settings.json", "r") as load_file:
     settings = load_file.read()
     load_file.close()
 psettings = json.loads(settings)
-if (psettings["full-version"] == True):
-    import Lib.turingAPI as turingAPI
-else:
-    import turingAPI
 if(not(os.path.exists("cookie.txt"))):
     cookie = input("请输入cookie\n")
     saveCookie(cookie)
